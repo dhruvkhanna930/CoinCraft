@@ -1,0 +1,61 @@
+{% extends 'base_auth.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<link href="{% static 'css/authentication/register.css' %}" rel="stylesheet">
+
+<div class="row">
+  <div class="main">
+    <div class="container b-container" id="b-container">
+      <form class="form" id="b-form" method="POST" action="{% url 'login' %}">
+
+        {% csrf_token %}
+        <h2 class="form_title title">Log in to CoinCraft</h2>
+
+        {% include 'partials/_messages.html' %}
+
+        <span class="form__span">Login to your coincraft account</span>
+
+        <input 
+          class="form__input form-control form-control-sm" 
+          type="text" 
+          name="username" 
+          placeholder="Username"
+          id="usernameField" 
+          value= "{{ fieldValues.username }}"
+        >
+        <div class="usernameFeedbackArea invalid-feedback" style="display: none;"></div>
+
+        <input 
+          type="password" 
+          name="password" 
+          placeholder="Password"
+          id="passwordField" 
+          class="form__input"
+        />
+        <div class="form__input-mod"><span style="font-size: 0.6rem; padding: 0.5rem; padding-top: 0; cursor: pointer; user-select: none;" class="showPasswordToggle">SHOW</span></div>
+
+        <!-- <a class="form__link">Forgot your password?</a> -->
+        <button class="form__button button submit" id="submit-btn">LOG IN</button>
+      </form>
+    </div>
+    
+    <div class="switch" id="switch-cnt">
+      <div class="switch__circle"></div>
+      <div class="switch__circle switch__circle--t"></div>
+      <div class="switch__container " id="switch-c2">
+        <h2 class="switch__title title">Hello Friend !</h2>
+        <p class="switch__description description">Enter your personal details and start journey with us</p>
+        <form action="{% url 'register' %}">
+          <button class="switch__button button switch-btn">REGISTER</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/authentication/register.js' %}"></script>
+
+{% endblock %}
